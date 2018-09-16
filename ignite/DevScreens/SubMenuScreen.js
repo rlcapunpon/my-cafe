@@ -10,6 +10,8 @@ import {
 import { Tile } from 'react-native-elements';
 import { Images } from './DevTheme'
 import styles from './Styles/PresentationScreenStyles'
+// Data
+import { pasta } from '../../data'
 
 class SubMenuScreen extends React.Component {
   inStyle = StyleSheet.create({
@@ -29,7 +31,13 @@ class SubMenuScreen extends React.Component {
 
   onLearnMore = (item, picture, itemName) => {
     this.props.navigation.state.activeMenuItem = "itemName";
-    this.props.navigation.navigate('SubMenuOptionsScreen', {...item, picture, itemName});
+    if ("Pasta w/ brewed coffee" === itemName) {
+      items = pasta;
+      imageIcon = Images.specialMenu;
+      this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon });
+    } else {
+      this.props.navigation.navigate('SubMenuOptionsScreen', {...item, picture, itemName});
+    }
   };
 
   render() {

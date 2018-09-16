@@ -22,6 +22,17 @@ import styles from './Styles/PresentationScreenStyles'
 import { coldDrinks, sweetDesserts, specialMenu, hotBeverages } from '../../data'
 
 class PresentationScreen extends React.Component {
+
+  handleClick = (link) => {
+    Linking.canOpenURL(link).then(supported => {
+      if (supported) {
+        Linking.openURL(link);
+      } else {
+        console.log("Unable to open link: " + link);
+      }
+    });
+  }
+
   openComponents = () => {
     // this.props.navigation.navigate('ComponentExamplesScreen')
   }
@@ -36,9 +47,15 @@ class PresentationScreen extends React.Component {
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
   }
 
+  openSpecialMenu = () => {
+    items = specialMenu;
+    imageIcon = Images.specialMenu;
+    this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
+  }
+
   openTheme = () => {
     items = coldDrinks;
-    imageIcon = Images.coldDrinksBg;
+    imageIcon = Images.theme;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
   }
 
@@ -90,7 +107,7 @@ class PresentationScreen extends React.Component {
           </View>
           <View>
             <ImageBackground  style={styles.buttonsContainer} source={Images.specialMenuBg}>
-              <ButtonBox onPress={this.openSweetsSubMenu} data={sweetDesserts} style={styles.componentButton} image={Images.components} text='Special Menu' />
+              <ButtonBox onPress={this.openSpecialMenu} data={spec} style={styles.componentButton} image={Images.components} text='Special Menu' />
             </ImageBackground>
           </View>
           <View style={styles.buttonsContainer}>
@@ -98,20 +115,20 @@ class PresentationScreen extends React.Component {
               <ButtonBox onPress={this.openApi} style={styles.componentButton} image={Images.api} text='Sweet Desserts' />
             </ImageBackground>
             <ImageBackground style={styles.buttonsContainer} source={Images.coldDrinksBg}>
-              <ButtonBox onPress={this.openTheme} style={styles.componentButton} image={Images.theme} text='Cold Drinks' />
+              <ButtonBox onPress={this.openTheme} style={styles.componentButton} image={Images.theme} text='Cold Beverages' />
             </ImageBackground>
           </View>
           <View style={styles.buttonsContainer}>
             <ImageBackground style={styles.buttonsContainer} source={Images.plainBlack}>
-              <ButtonBox style={styles.deviceButton} image={Images.deviceInfo} text="Let's Talk" />
+              <ButtonBox style={styles.deviceButton} image={Images.deviceInfo} text="Let's Talk" onPress={this.handleLinkUrl("https://www.facebook.com/NetzCoffee/")}/>
             </ImageBackground>
             <ImageBackground style={styles.buttonsContainer} source={Images.plainBlack}>
-              <ButtonBox onPress={this.openFaq} style={styles.componentButton} image={Images.faq} text='Find Us' />
+              <ButtonBox onPress={this.openFaq} style={styles.componentButton} image={Images.faq} text='Find Us' onPress={this.handleLinkUrl("http://netzglasstower.com/")}/>
             </ImageBackground>
           </View>
         </ScrollView>
         <View style={styles.banner}>
-          <Text style={styles.bannerLabel}>Made with ❤️ by Ramon Capunpon</Text>
+          <Text style={styles.bannerLabel}>Made with ❤️ by Ahmet, Mitch, and Liowkee</Text>
         </View>
       </View>
     )
