@@ -3,6 +3,8 @@ import { ScrollView, Text, Image, View, TouchableOpacity, ImageBackground } from
 import { Images } from './DevTheme'
 import ButtonBox from './ButtonBox'
 import { StackNavigator } from 'react-navigation'
+import { Constants, WebBrowser } from 'expo';
+
 // Screens
 import APITestingScreen from './APITestingScreen'
 import ComponentExamplesScreen from './ComponentExamplesScreen'
@@ -22,16 +24,6 @@ import styles from './Styles/PresentationScreenStyles'
 import { coldDrinks, sweetDesserts, specialMenu, hotBeverages } from '../../data'
 
 class PresentationScreen extends React.Component {
-
-  handleClick = (link) => {
-    Linking.canOpenURL(link).then(supported => {
-      if (supported) {
-        Linking.openURL(link);
-      } else {
-        console.log("Unable to open link: " + link);
-      }
-    });
-  }
 
   openComponents = () => {
     // this.props.navigation.navigate('ComponentExamplesScreen')
@@ -107,7 +99,7 @@ class PresentationScreen extends React.Component {
           </View>
           <View>
             <ImageBackground  style={styles.buttonsContainer} source={Images.specialMenuBg}>
-              <ButtonBox onPress={this.openSpecialMenu} data={spec} style={styles.componentButton} image={Images.components} text='Special Menu' />
+              <ButtonBox onPress={this.openSpecialMenu} data={specialMenu} style={styles.componentButton} image={Images.components} text='Special Menu' />
             </ImageBackground>
           </View>
           <View style={styles.buttonsContainer}>
@@ -120,10 +112,10 @@ class PresentationScreen extends React.Component {
           </View>
           <View style={styles.buttonsContainer}>
             <ImageBackground style={styles.buttonsContainer} source={Images.plainBlack}>
-              <ButtonBox style={styles.deviceButton} image={Images.deviceInfo} text="Let's Talk" onPress={this.handleLinkUrl("https://www.facebook.com/NetzCoffee/")}/>
+              <ButtonBox style={styles.deviceButton} image={Images.deviceInfo} text="Let's Talk" onPress={() => WebBrowser.openBrowserAsync("https://www.facebook.com/NetzCoffee/")}/>
             </ImageBackground>
             <ImageBackground style={styles.buttonsContainer} source={Images.plainBlack}>
-              <ButtonBox style={styles.componentButton} image={Images.faq} text='Find Us' onPress={this.handleLinkUrl("http://netzglasstower.com/")}/>
+              <ButtonBox style={styles.componentButton} image={Images.faq} text='Find Us' onPress={() => WebBrowser.openBrowserAsync("http://netzglasstower.com/")}/>
             </ImageBackground>
           </View>
         </ScrollView>

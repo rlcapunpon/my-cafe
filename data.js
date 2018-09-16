@@ -70,7 +70,7 @@ export const specialMenu =
         "category": "Special Menu",
         "picture":{
           "small": "",
-          "large": "https://cbstailgatefan.files.wordpress.com/2013/10/nachos1.jpg?w=640&h=360&crop=1"
+          "large": "https://lh6.googleusercontent.com/jDkwoBZdv9n5oasMJs5-6l7jP5nXUNXQIVJvnVJihIk7_86o9phi8iTLiS0WmB97pQrztjVyxS0IcsFv-_IEGgkKiwvqezUhQz5XTRsdaJWwC-4Nq3GaLYrDW5DyZw"
         },
         "options": [
           {
@@ -111,7 +111,7 @@ export const specialMenu =
       {
         "id": "bp",
         "name": "Carborana",
-        "description": "Item description",
+        "description": "Carbonara (Italian: [karboˈnaːra]) is an Italian pasta dish from Rome made with egg, hard cheese, guanciale (or pancetta), and pepper. The recipe is not fixed by a specific type of hard cheese or pasta. The cheese is usually Pecorino Romano. Spaghetti is the usual pasta, however, fettuccine, rigatoni, linguine, or bucatini are also used. Either guanciale or pancetta can be used. Another common substitute outside Italy is lardons of smoked bacon.",
         "category": "Special Menu",
         "picture":{
           "small": "",
@@ -388,8 +388,8 @@ export const specialMenu =
         "description": "Iced latte is usually espresso and chilled milk poured over ice. Unlike a hot latte, it does not usually contain steamed milk or foam. Iced lattes almost always have sugar or flavouring syrups added, and are sometimes served blended with the ice. The espresso can be pre-chilled (sometimes as a mixture of espresso and milk) or frozen in advance to avoid warming up the drink.",
         "category": "Cold Drinks",
         "picture":{
-          "small": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Koffie_verkeerd_cafe_MP_Amsterdam.jpg/542px-Koffie_verkeerd_cafe_MP_Amsterdam.jpg",
-          "large": ""
+          "small": "",
+          "large": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Koffie_verkeerd_cafe_MP_Amsterdam.jpg/542px-Koffie_verkeerd_cafe_MP_Amsterdam.jpg"
         },
         "options": [
           {
@@ -533,33 +533,6 @@ export const specialMenu =
             "name": "Large",
             "price": 95,
             "id": "hb-cap-l"  
-          }
-        ]
-      },
-      {
-        "id": "ame",
-        "name": "Americano",
-        "description": "Caffè Americano (Italian pronunciation: [kafˈfɛ ameriˈkaːno]) or Americano (shortened from Italian: caffè americano or American; Spanish: café americano, literally American coffee) is a type of coffee drink prepared by diluting an espresso with hot water, giving it a similar strength to, but different flavor from traditionally brewed coffee. ",
-        "category": "Hot Beverages",
-        "picture":{
-          "small": "",
-          "large": "https://upload.wikimedia.org/wikipedia/commons/2/22/Cappuccino_coffee_at_Surry_Hills%2C_Sydney.jpg"
-        },
-        "options": [
-          {
-            "name": "Small",
-            "price": 65,
-            "id": "hb-ame-s" 
-          },
-          {
-            "name": "Medium",
-            "price": 75,
-            "id": "hb-ame-m"  
-          },
-          {
-            "name": "Large",
-            "price": 85,
-            "id": "hb-ame-l"  
           }
         ]
       },

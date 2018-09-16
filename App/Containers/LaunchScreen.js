@@ -20,7 +20,7 @@ export default class LaunchScreen extends Component {
           <View style={styles.section} >
             <Image source={Images.ready} />
             <Text style={styles.sectionText}>
-              Welcome to Ramon's madeup Cafe! Pouring coffee made with love into your cup. :)
+              Welcome to Netz Coffee! Pouring coffee made with love into your cup. :)
             </Text>
           </View>
 
