@@ -123,7 +123,7 @@ class PresentationScreen extends React.Component {
               <ButtonBox style={styles.deviceButton} image={Images.deviceInfo} text="Let's Talk" onPress={this.handleLinkUrl("https://www.facebook.com/NetzCoffee/")}/>
             </ImageBackground>
             <ImageBackground style={styles.buttonsContainer} source={Images.plainBlack}>
-              <ButtonBox onPress={this.openFaq} style={styles.componentButton} image={Images.faq} text='Find Us' onPress={this.handleLinkUrl("http://netzglasstower.com/")}/>
+              <ButtonBox style={styles.componentButton} image={Images.faq} text='Find Us' onPress={this.handleLinkUrl("http://netzglasstower.com/")}/>
             </ImageBackground>
           </View>
         </ScrollView>
