@@ -1,4 +1,4 @@
-# apartment-manager
+# my cafe
 
 > An app for Apartment Management using Vue.js 
 
