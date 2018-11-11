@@ -74,8 +74,8 @@ data () {
     handleSubmit (e) {
       this.input.category = this.getCategoryValue();
       this.options = this.itemOptions;
-      // this.additem(this.input)
-      console.log(JSON.stringify(this.input))
+      this.additem(this.input, this.category)
+      // console.log(JSON.stringify(this.input))
       this.$emit('addSubmit')
       this.clearItem()
     },
