@@ -19,7 +19,7 @@ const actions = {
         },
         error => {
           commit('addFailure', 'Addition Failure.')
-          dispatch('alert/error', 'Addition Failure.', { root: true })
+          dispatch('alert/error', 'Addition Failure.' + error.toString(), { root: true })
         }
       )
   },
