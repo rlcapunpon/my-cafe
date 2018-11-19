@@ -40,12 +40,14 @@ export default {
   name: 'Home',
   data () {
     return {
-      active:0
+      active: localStorage.active
     }
   },
   methods: {
     changeActive (index) {
       this.active = index
+      localStorage.active = index
+      this.$router.go()
     }
   },
   components: {

@@ -18,12 +18,12 @@
         <div class="form-group">
           <label for="options">Options:</label><br/>
           <div class="span">Name</div><div class="span">Price</div>
-          <input class="options" type="text" name="option1name" v-model="itemOptions[0].name" placeholder="Small" />
-          <input class="options" type="number" name="option1price" v-model="itemOptions[0].price" placeholder="75" />
-          <input class="options" type="text" name="option2name" v-model="itemOptions[1].name" placeholder="Medium" />
-          <input class="options" type="number" name="option2price" v-model="itemOptions[1].price" placeholder="85" />
-          <input class="options" type="text" name="option3name" v-model="itemOptions[2].name" placeholder="Large" />
-          <input class="options" type="number" name="option3price" v-model="itemOptions[2].price" placeholder="95" />
+          <input class="options" type="text" name="option1name" v-model="input.options[0].name" placeholder="Small" />
+          <input class="options" type="number" name="option1price" v-model="input.options[0].price" placeholder="75" />
+          <input class="options" type="text" name="option2name" v-model="input.options[1].name" placeholder="Medium" />
+          <input class="options" type="number" name="option2price" v-model="input.options[1].price" placeholder="85" />
+          <input class="options" type="text" name="option3name" v-model="input.options[2].name" placeholder="Large" />
+          <input class="options" type="number" name="option3price" v-model="input.options[2].price" placeholder="95" />
         </div>
         <div class="form-group">
           <button class="btn btn-primary">Add</button>
@@ -46,11 +46,11 @@ data () {
        input: {
         name: '',
         description: '',
-        category: '',
-        picture: {},
-        options: []
-       },
-       itemOptions: [{name:'',price:0},{name:'',price:0},{name:'',price:0}]
+        category: this.getCategoryValue(this.category),
+        picture: {large:''},
+        options: [{name:'',price:0},{name:'',price:0},{name:'',price:0}],
+        relativeCategory: this.category
+       }
     }
   },
   methods: {
@@ -64,28 +64,29 @@ data () {
         case 'hotbeverage': return 'Hot Beverages'
       }
     },
-    getCategoryValue () {
-      if (this.category === 'pasta') {
+    getCategoryValue (category) {
+      if (category === 'pasta') {
         return 'Special Menu'
       } else {
         return this.getCategoryName()
       }   
     },
     handleSubmit (e) {
-      this.input.category = this.getCategoryValue();
-      this.options = this.itemOptions;
-      this.additem(this.input, this.category)
-      // console.log(JSON.stringify(this.input))
+      console.log(this.category)
+      console.log(JSON.stringify(this.input))
+      this.additem(this.input)
       this.$emit('addSubmit')
       this.clearItem()
+      this.$router.go()
     },
     clearItem () {
       let input = {
         name: '',
         description: '',
         category: '',
-        picture: {},
-        options: []
+        picture: {large:''},
+        options: [{name:'',price:0},{name:'',price:0},{name:'',price:0}],
+        relativeCategory: this.category
        }
        this.input = input
     }

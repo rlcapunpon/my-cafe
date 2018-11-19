@@ -6,38 +6,41 @@ const state = {
 }
 
 const actions = {
-  additem ({ dispatch, commit }, item, category) {
+  additem ({ dispatch, commit }, item ) {
     commit('addRequest', item)
-    itemService.add(item, category)
+    itemService.add(item)
       .then(
         item => {
-          commit('addSuccess', item)
+          commit('addSuccess', item, item.relativeCategory)
           setTimeout(() => {
             // display success message after route change completes
             dispatch('alert/success', 'item Addition successful', { root: true })
           })
         },
         error => {
-          commit('addFailure', 'Addition Failure.')
+          commit('addFailure', 'Addition Failure.', item.relativeCategory)
           dispatch('alert/error', 'Addition Failure.' + error.toString(), { root: true })
         }
       )
   },
-  getAll ({ commit }, category) {
-    commit('getAllRequest')
-    itemService.getAll(category)
+  getAll ({ commit }, relativeCategory) {
+    console.log('getting all items under' + relativeCategory)
+    commit('getAllRequest', relativeCategory)
+    itemService.getAll(relativeCategory)
       .then(
-        items => commit('getAllSuccess', items),
-        error => commit('getAllFailure', error.toString())
+        items => commit('getAllSuccess', items, relativeCategory),
+        error => commit('getAllFailure', error.toString(), relativeCategory)
       )
   },
-  delete ({ commit }, id, category) {
-    commit('deleteRequest', id)
+  delete ({ commit }, item) {
+    var id = item.id
+    var relativeCategory = item.relativeCategory
+    commit('deleteRequest', id, relativeCategory)
     // router.push('/')
-    itemService.delete(id, category)
+    itemService.delete(id, relativeCategory)
       .then(
-        item => commit('deleteSuccess', id),
-        error => commit('deleteSuccess', { id, error: error.toString() })
+        item => commit('deleteSuccess', id, relativeCategory),
+        error => commit('deleteSuccess', { id, error: error.toString() }, relativeCategory)
       )
   }
 }
@@ -71,7 +74,7 @@ const mutations = {
   },
   deleteSuccess (state, id) {
     // remove deleted user from state
-    state.all.items = state.all.items.filter(item => item.id !== id)
+    state.all.items = state.all.items.filter(item => item._id !== id)
   },
   deleteFailure (state, { id, error }) {
     // remove 'deleting:true' property and add 'deleteError:[error]' property to user

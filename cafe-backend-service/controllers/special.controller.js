@@ -11,9 +11,10 @@ router.delete('/:_id', _delete);
 module.exports = router;
 
 function add(req, res) {
+    console.log(JSON.stringify(req.body))
   specialService.create(req.body)
-      .then(function (bill) {
-          res.status(200).send(bill);
+      .then(function (specialItem) {
+          res.status(200).send(specialItem);
       })
       .catch(function (err) {
           var data = {
@@ -24,9 +25,10 @@ function add(req, res) {
 }
 
 function getAll(req, res) {
+    console.log("Getting all")
   specialService.getAll()
-      .then(function (bills) {
-          res.send(bills);
+      .then(function (specialItems) {
+          res.send(specialItems);
       })
       .catch(function (err) {
           res.status(400).send(err);

@@ -6,24 +6,31 @@ export const itemService = {
 
 const apiUrl = 'http://localhost:4000'
 
-function add (item, category) {
+function add (item) {
+  var category = item.relativeCategory
   const requestOptions = {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item)
   }
+  console.log('item: ' + JSON.stringify(item))
+  console.log('adding: ' + `${apiUrl}/${category}/add`)
   return fetch(`${apiUrl}/${category}/add`, requestOptions).then(handleResponse)
 }
 
 function getAll (category) {
+  console.log('Service: getting all under ' + category)
   const requestOptions = {
-    method: 'GET'
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
   }
   return fetch(`${apiUrl}/${category}`, requestOptions).then(handleResponse)
 }
 
 function _delete (id, category) {
   const requestOptions = {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
   }
 
   return fetch(`${apiUrl}/${category}/${id}`, requestOptions).then(handleResponse)
