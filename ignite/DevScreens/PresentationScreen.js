@@ -21,9 +21,22 @@ import PaymentDetailsScreen from './PaymentDetailsScreen'
 import styles from './Styles/PresentationScreenStyles'
 
 // Data
-import { coldDrinks, sweetDesserts, specialMenu, hotBeverages } from '../../data'
+import { coldDrinks, sweetDesserts, specialMenu, hotBeverages, server_url } from '../../data'
 
 class PresentationScreen extends React.Component {
+
+  getItemsFromApi(category) {
+    console.log('loading from api: ' + category)
+    
+    return fetch('http://192.168.43.233/' + category)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      return responseJson;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
   openComponents = () => {
     // this.props.navigation.navigate('ComponentExamplesScreen')
@@ -34,21 +47,46 @@ class PresentationScreen extends React.Component {
   }
 
   openApi = () => {
+    fetch(server_url + 'desserts')
+    .then((response) => response.json())
+    .then((responseJson) => {
+    sweetDesserts.items = responseJson;
     items = sweetDesserts;
     imageIcon = Images.api;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   openSpecialMenu = () => {
+    fetch(server_url + 'special')
+    .then((response) => response.json())
+    .then((responseJson) => {
+    specialMenu.items = responseJson;
     items = specialMenu;
+    console.log(specialMenu.items);
     imageIcon = Images.specialMenu;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   openTheme = () => {
+    fetch(server_url + 'colddrinks')
+    .then((response) => response.json())
+    .then((responseJson) => {
+    coldDrinks.items = responseJson;
     items = coldDrinks;
     imageIcon = Images.theme;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   openFaq = () => {
@@ -60,15 +98,31 @@ class PresentationScreen extends React.Component {
   }
 
   openBeveragesSubMenu = () => {
+    fetch(server_url + 'hotbeverage')
+    .then((response) => response.json())
+    .then((responseJson) => {
+    hotBeverages.items = responseJson;
     items = hotBeverages;
     imageIcon = Images.coffeeIcon;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   openSweetsSubMenu = () => {
-    items = sweetDesserts
-    imageIcon = Images.components;
+    fetch(server_url + 'desserts')
+    .then((response) => response.json())
+    .then((responseJson) => {
+    sweetDesserts.items = responseJson;
+    items = sweetDesserts;
+    imageIcon = Images.api;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   render () {

@@ -18,19 +18,12 @@
 2. Run Build for either OS
   * run `yarn start`
 
-## :no_entry_sign: Standard Compliant
+## :arrow_forward: Configuring the Server URL
+1. Open data.js file, update the server_url using the proper url of the server back end service
+2. In the development mode, once the Admin Web App is running, copy the IP address of the NETWORK IP address and replace the IP 
+in server_url's value
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-This project adheres to Standard.  Our CI enforces this, so we suggest you enable linting to keep your project compliant during development.
+## :arrow_forward: Notes on how to add Pasta w/ brewed coffee
 
-**To Lint on Commit**
-
-This is implemented using [husky](https://github.com/typicode/husky). There is no additional setup needed.
-
-**Bypass Lint**
-
-If you have to bypass lint for a special commit that you will come back and clean (pushing something to a branch etc.) then you can bypass git hooks with adding `--no-verify` to your commit command.
-
-**Understanding Linting Errors**
-
-The linting rules are from JS Standard and React-Standard.  [Regular JS errors can be found with descriptions here](http://eslint.org/docs/rules/), while [React errors and descriptions can be found here](https://github.com/yannickcr/eslint-plugin-react).
+1. In the Admin Web App, under 'SPECIALS', add an item with name "Pasta w/ brewed coffee" - this is CASE SENSITIVE
+2. To add options and items under this subcategory, In the Admin Web App, add items under 'PASTA'

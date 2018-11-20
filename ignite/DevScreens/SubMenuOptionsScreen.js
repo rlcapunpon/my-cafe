@@ -31,7 +31,7 @@ class SubMenuOptionsScreen extends Component {
         </TouchableOpacity>
         <ScrollView style={{marginTop: 60}}>
           <List>
-            {options.map((option) => (
+            {options.filter(option => option.name !== '').map((option) => (
               <ListItem
               key={option.name}
               title={`${option.name}`}
