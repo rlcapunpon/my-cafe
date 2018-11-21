@@ -18,7 +18,7 @@ class AddToCartScreen extends Component {
   };
 
   render() {
-    const { id, name, price, picture, menuName } = this.props.navigation.state.params;
+    const { name, price, picture, menuName } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
@@ -52,7 +52,7 @@ class AddToCartScreen extends Component {
                 hideChevron
               />
             </List>
-            <AddToCartButton id={id} name={name} price={price} menu={menuName} onPress={this.navigateToMenuScreen}/>
+            <AddToCartButton id={(new Date()).toLocaleTimeString()} name={name} price={price} menu={menuName} onPress={this.navigateToMenuScreen}/>
         </ScrollView>
       </View>
     );

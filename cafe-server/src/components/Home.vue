@@ -10,6 +10,7 @@
     </div>
     <div v-if="active==0" class="menu-category">
       <h3>Orders</h3><br>
+      <orders></orders>
     </div>
     <div v-if="active==1" class="menu-category">
       <h3>Special Menu</h3><br>
@@ -36,6 +37,7 @@
 
 <script>
 import MenuTable from './MenuTable.vue'
+import Orders from './Orders.vue'
 export default {
   name: 'Home',
   data () {
@@ -51,7 +53,8 @@ export default {
     }
   },
   components: {
-    'menu-table': MenuTable
+    'menu-table': MenuTable,
+    'orders': Orders
   }
 }
 </script>

@@ -11,6 +11,7 @@ router.delete('/:_id', _delete);
 module.exports = router;
 
 function add(req, res) {
+    console.log("Adding: " + req.body);
   ordersService.create(req.body)
       .then(function (order) {
           res.status(200).send(order);

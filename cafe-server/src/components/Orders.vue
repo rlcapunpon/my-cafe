@@ -1,12 +1,20 @@
 <template>
   <div class="menu-table">
-    List of {{getCategoryName()}}
-    <div class="item" v-for="item in menu.items" :key="item.name">
-      Name: {{item.name}}
-      <br/>Option: {{item.option}}
-      <br/>Quantity: {{item.quantity}}
+    <div class="item"  v-if="item.relativeCategory === 'orders'" v-for="item in orders.items" :key="item._id">
+      <div class="order">
+        <div class="customer">
+          Name: {{item.customer.name}}<br>
+          Address: {{item.customer.address}}<br>
+          Contact: {{item.customer.contact}}<br>
+          <div class="order-item" v-for="orderItem in item.items" :key="orderItem.id">
+            Item Name: {{orderItem.name}}<br>
+            Menu: {{orderItem.menuName}}<br>
+            Price: {{orderItem.price}}
+          </div><br>
+          Total Amount: {{item.totalAmount}}
+        </div>
+      </div>
     </div>
-    <add-item :category="category"></add-item>
   </div>
 </template>
 
@@ -16,6 +24,7 @@ export default {
 name: 'Orders',
   data () {
     return {
+      timer: ''
     }
   },
   computed: {
@@ -25,11 +34,18 @@ name: 'Orders',
   },
   created () {
     this.getAllOrders('orders')
+    this.timer = setInterval(this.reloadPage, 5000)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   },
   methods: {
     ...mapActions('items', {
       getAllOrders: 'getAll'
-    })
+    }),
+    reloadPage () {
+      this.$router.go()
+    }
   }
 }
 </script>
@@ -49,5 +65,11 @@ name: 'Orders',
 .delbtn {
   float: right;
   margin-top: -3px;
+}
+
+.order-item {
+  border: 1px solid lightgrey;
+  padding: 2px;
+  border-radius: 2px;
 }
 </style>
