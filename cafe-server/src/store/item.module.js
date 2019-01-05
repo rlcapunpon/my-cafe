@@ -42,6 +42,24 @@ const actions = {
         item => commit('deleteSuccess', id, relativeCategory),
         error => commit('deleteSuccess', { id, error: error.toString() }, relativeCategory)
       )
+  },
+  deleteAll({ commit }) {
+    var id = 'all';
+    commit('deleteRequest', id, relativeCategory)
+    // router.push('/')
+    itemService.deleteAll(id, relativeCategory)
+      .then(
+        item => commit('deleteSuccess', id, relativeCategory),
+        error => commit('deleteSuccess', { id, error: error.toString() }, relativeCategory)
+      )
+  },
+  changeStatus ({ commit }, id) {
+    commit('changeStatusRequest')
+    itemService.changeStatus(id)
+      .then(
+        item => commit('changeStatusSuccess', { id, item }),
+        error => commit('changeStatusFailure', { id, error: error.toString() })
+      )
   }
 }
 
@@ -63,6 +81,36 @@ const mutations = {
   },
   getAllFailure (state, error) {
     state.all = { error }
+  },
+  changeStatusRequest (state, id) {
+    console.log('mutation for change status request committed.')
+    state.all.items = state.all.items.map(item =>
+      item.id === id
+        ? { ...item, updating: true }
+        : item
+    )
+  },
+  changeStatusSuccess (state, id, update) {
+    console.log('mutation for change status success committed.')
+    state.all.items = state.all.items.map(item =>
+      item.id === id
+        ? update
+        : item
+    )
+  },
+  changeStatusFailure (state, { id, error }) {
+    console.log('mutation for change status failure committed.')
+    // remove 'deleting:true' property and add 'deleteError:[error]' property to user
+    state.all.items = state.items.map(item => {
+      if (item.id === id) {
+        // make copy of user without 'deleting:true' property
+        const { updating, ...itemCopy } = item
+        // return copy of user with 'deleteError:[error]' property
+        return { ...itemCopy, statusUpdate: error }
+      }
+
+      return item
+    })
   },
   deleteRequest (state, id) {
     // add 'deleting:true' property to user being deleted

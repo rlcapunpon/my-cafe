@@ -2,11 +2,12 @@ import React from 'react'
 import { Button, Text, View, Form } from 'react-native'
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import { addItem } from '../Redux/Actions/CartActions'
+import { addItem, deleteAll } from '../Redux/Actions/CartActions'
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart: item => dispatch(addItem(item))
+    addToCart: item => dispatch(addItem(item)),
+    removeAll: item => dispatch(deleteAll())
   };
 };
 

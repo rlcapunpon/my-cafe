@@ -30,6 +30,7 @@ app.use('/colddrinks', require('./controllers/colddrinks.controller'));
 app.use('/desserts', require('./controllers/desserts.controller'));
 app.use('/hotbeverage', require('./controllers/hotbeverage.controller'));
 app.use('/orders', require('./controllers/orders.controller'));
+app.use('/login', require('./controllers/login.controller'));
 
 // start server
 var port = process.env.NODE_ENV === 'production' ? 80 : 4000;

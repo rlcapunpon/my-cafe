@@ -20,11 +20,11 @@ export default class LaunchScreen extends Component {
           <View style={styles.section} >
             <Image source={Images.ready} />
             <Text style={styles.sectionText}>
-              Welcome to Netz Coffee! Pouring coffee made with love into your cup. :)
+              Welcome {this.props.navigation.state.params.email} to Netz Coffee! Pouring coffee made with love into your cup. :)
             </Text>
           </View>
 
-          <DevscreensButton />
+          <DevscreensButton email={this.props.navigation.state.params.email}/>
         </ScrollView>
       </View>
     )

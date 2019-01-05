@@ -15,20 +15,32 @@ import SubMenuScreen from './SubMenuScreen'
 import SubMenuOptionsScreen from './SubMenuOptionsScreen'
 import AddToCartScreen from './AddToCartScreen'
 import CartScreen from './CartScreen'
+import OrdersScreen from './OrdersScreen'
 import PaymentDetailsScreen from './PaymentDetailsScreen'
 
 // Styles
 import styles from './Styles/PresentationScreenStyles'
 
 // Data
-import { coldDrinks, sweetDesserts, specialMenu, hotBeverages, server_url } from '../../data'
-
+import { coldDrinks, sweetDesserts, specialMenu, hotBeverages, server_url, customer_email } from '../../data'
+var items = {}
 class PresentationScreen extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+       email: this.props.email
+    }
+  }
+  componentDidMount(){
+    this.setState({
+        email: this.props.email
+    });
+}
 
   getItemsFromApi(category) {
     console.log('loading from api: ' + category)
     
-    return fetch('http://192.168.43.233/' + category)
+    return fetch(server_url + category)
     .then((response) => response.json())
     .then((responseJson) => {
       return responseJson;
@@ -66,7 +78,7 @@ class PresentationScreen extends React.Component {
     .then((responseJson) => {
     specialMenu.items = responseJson;
     items = specialMenu;
-    console.log(specialMenu.items);
+    console.log('SPECIAL MENU: ' + JSON.stringify(specialMenu));
     imageIcon = Images.specialMenu;
     this.props.navigation.navigate('SubMenuScreen', { ...items, imageIcon })
     })
@@ -95,6 +107,35 @@ class PresentationScreen extends React.Component {
 
   openCart = () => {
     this.props.navigation.navigate('CartScreen')
+  }
+
+  openOrders = () => {
+
+    var data = {};
+    data.email = global.loggedEmail;
+
+    console.log('EMAIL ACTIVE: ' + global.loggedEmail);
+
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }
+
+    fetch(server_url + 'orders/user/' + data.email)
+    .then((response) => response.json())
+    .then((responseJson) => {
+    items = responseJson;
+    global.orders = responseJson
+    console.log("ITEMS: " + JSON.stringify(items))
+    console.log(typeof(items))
+    
+    imageIcon = Images.coffeeIcon;
+    this.props.navigation.navigate('OrdersScreen', { ...items, imageIcon })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   openBeveragesSubMenu = () => {
@@ -147,14 +188,14 @@ class PresentationScreen extends React.Component {
             Indulge yourselves in our world class and mouthwatering delicacies.
           </Text>
           <View>
-            <ImageBackground  style={styles.buttonsContainer} source={Images.hotBeveragesBg}>
-              <ButtonBox onPress={this.openBeveragesSubMenu} data={hotBeverages} style={styles.componentButton} image={Images.coffeeIcon} text='Hot Beverages' />
-          </ImageBackground>
-          </View>
-          <View>
             <ImageBackground  style={styles.buttonsContainer} source={Images.specialMenuBg}>
               <ButtonBox onPress={this.openSpecialMenu} data={specialMenu} style={styles.componentButton} image={Images.components} text='Special Menu' />
             </ImageBackground>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <ImageBackground  style={styles.buttonsContainer} source={Images.hotBeveragesBg}>
+              <ButtonBox onPress={this.openBeveragesSubMenu} data={hotBeverages} style={styles.componentButton} image={Images.coffeeIcon} text='Hot Beverages' />
+          </ImageBackground>
           </View>
           <View style={styles.buttonsContainer}>
             <ImageBackground style={styles.buttonsContainer} source={Images.sweetDessertsBg}>
@@ -171,6 +212,11 @@ class PresentationScreen extends React.Component {
             <ImageBackground style={styles.buttonsContainer} source={Images.plainBlack}>
               <ButtonBox style={styles.componentButton} image={Images.faq} text='Find Us' onPress={() => WebBrowser.openBrowserAsync("http://netzglasstower.com/")}/>
             </ImageBackground>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <ImageBackground  style={styles.buttonsContainer} source={Images.hotBeveragesBg}>
+              <ButtonBox onPress={this.openOrders} data={items} style={styles.componentButton} image={Images.coffeeIcon} text='My Orders' />
+          </ImageBackground>
           </View>
         </ScrollView>
         <View style={styles.banner}>
@@ -192,7 +238,8 @@ export default StackNavigator({
   ThemeScreen: {screen: ThemeScreen},
   FaqScreen: {screen: FaqScreen},
   CartScreen: { screen: CartScreen },
-  PaymentDetailsScreen: { screen: PaymentDetailsScreen }
+  PaymentDetailsScreen: { screen: PaymentDetailsScreen },
+  OrdersScreen: { screen: OrdersScreen }
 }, {
   cardStyle: {
     opacity: 1

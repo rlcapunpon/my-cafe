@@ -37,13 +37,7 @@ class PaymentDetailsScreen extends React.Component {
       </View>
       <ScrollView style={{alignContent: 'center'}}>
       <Text style={styles.buttonText}>
-        To complete your order, please pay through the PayMaya App.
-      </Text>
-      <Text style={styles.buttonText}>
-        Kindly use this account number: 9029348023948
-      </Text>
-      <Text style={styles.buttonText}>    
-        Enter your name and contact number on the remarks.
+        To complete your order, please wait for our customer representative to call you.
       </Text>
       <Button 
       type="backToMain"

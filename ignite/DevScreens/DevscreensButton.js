@@ -8,11 +8,20 @@ export default class DevscreensButton extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      showModal: false
+      showModal: false,
+      email:this.props.email
     }
   }
+  componentDidMount(){
+    global.loggedEmail = this.props.email
+    this.setState({
+        showModal: false,
+        email:this.props.email
+    });
+}
 
   toggleModal = () => {
+    console.log('TOGGLE user: ' + this.state.email);
     this.setState({ showModal: !this.state.showModal })
   }
 
@@ -26,7 +35,7 @@ export default class DevscreensButton extends React.Component {
           <Modal
             visible={this.state.showModal}
             onRequestClose={this.toggleModal}>
-            <PresentationScreen screenProps={{ toggle: this.toggleModal }} />
+            <PresentationScreen screenProps={{ toggle: this.toggleModal }} email={this.props.email} />
           </Modal>
         </View>
       )

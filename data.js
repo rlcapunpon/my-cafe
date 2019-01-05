@@ -55,3 +55,5 @@ export const specialMenu =
   };
 
   export const server_url = 'http://192.168.43.233:4000/';
+
+  export var customer_email = {};

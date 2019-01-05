@@ -1,6 +1,7 @@
 export const itemService = {
   add,
   getAll,
+  changeStatus,
   delete: _delete
 }
 
@@ -16,6 +17,15 @@ function add (item) {
   console.log('item: ' + JSON.stringify(item))
   console.log('adding: ' + `${apiUrl}/${category}/add`)
   return fetch(`${apiUrl}/${category}/add`, requestOptions).then(handleResponse)
+}
+
+function changeStatus (id) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' }
+  }
+
+  return fetch(`${apiUrl}/orders/status/${id}`, requestOptions).then(handleResponse)
 }
 
 function getAll (category) {

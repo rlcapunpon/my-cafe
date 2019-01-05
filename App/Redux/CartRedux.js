@@ -10,6 +10,9 @@ export const reducer = (state = [], action) => {
             return state.filter(({ item }) => item.id !== action.payload.id);
         case Actions.GET_ITEMS:
             return state;
+        case Actions.REMOVE_ALL:
+            state = [];
+            return state;
         default:
             return state;
     }
