@@ -647,7 +647,7 @@
     lodash.pick "^4.4.0"
     shallowequal "^0.2.2"
 
-"@storybook/react-native@^3.2.16":
+"@storybook/react-native@^3.4.10":
   version "3.4.10"
   resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-3.4.10.tgz#80480ec4ac2cf9597c4524b7f4ba44968b42f08e"
   dependencies:
@@ -7330,7 +7330,7 @@ no-case@^2.2.0:
 
 node-fetch@1.6.3:
   version "1.6.3"
-  resolved "http://registry.npmjs.org/node-fetch/-/node-fetch-1.6.3.tgz#dc234edd6489982d58e8f0db4f695029abcd8c04"
+  resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-1.6.3.tgz#dc234edd6489982d58e8f0db4f695029abcd8c04"
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
